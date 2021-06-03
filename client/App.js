@@ -5,12 +5,15 @@ import { NativeRouter, Route, Link } from "react-router-native";
 import BottomNavbar from "./components/BottomNavbar";
 import Header from "./components/Header";
 import {theme} from './constants/theme'
+import AuthProvider from "./providers/AuthProvider";
 
 
 const App = () => (
   <PaperProvider theme={theme}>
+    <AuthProvider>
     <Header />
     <BottomNavbar />
+    </AuthProvider>
   </PaperProvider>
 );
 // AppRegistry.registerComponent("MyApp", () => App);

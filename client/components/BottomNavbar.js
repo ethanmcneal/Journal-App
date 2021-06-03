@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
+import { AuthContext } from '../providers/AuthProvider';
 import Home from '../screens/Home';
+import Login from '../screens/Login';
 
-const HomeRoute = () => <Home />;
+const HomeRoute = () => {
+  const {user} = useContext(AuthContext)
+if(user){return (
+<Home />
+)} else {
+  return <Login />
+}
+
+}
 
 const AlbumsRoute = () => <Text>Albums</Text>;
 
