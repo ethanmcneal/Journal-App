@@ -24,7 +24,7 @@ const AuthProvider = (props) => {
 
   const handleLogin = async (user) => {
     try {
-      let res = await axios.post(`${API_URL}api/auth/sign_in`, user);
+      let res = await axios.post(`${API_URL}/api/auth/sign_in`, user);
       setUser(res.data.data);
     } catch (error) {
       console.log(error);

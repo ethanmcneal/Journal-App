@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { theme } from "../constants/theme";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const {handleLogin} = useContext(AuthContext)
   return (
     <View style={styles.screen}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Login</Text>
       </View>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} label="Email" />
-        <TextInput style={styles.input} label="Password" secureTextEntry />
+        <TextInput
+          style={styles.input}
+          label="Email"
+          value={credentials.email}
+          onChangeText={(e) => setCredentials({...credentials, email: e})}
+        />
+        <TextInput
+          style={styles.input}
+          label="Password"
+          secureTextEntry
+          value={credentials.password}
+          onChangeText={(e) => setCredentials({...credentials, password: e})}
+        />
         <Button
           labelStyle={{ color: "white" }}
           color={theme.colors.accent}
           style={styles.button}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => handleLogin(credentials)}
         >
           Login
         </Button>
