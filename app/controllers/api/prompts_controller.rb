@@ -17,13 +17,15 @@ class Api::PromptsController < ApplicationController
             render json: prompt
         else
             render json: {errors: prompt.errors }, message: 'you did something wrong', status: :unprocessable_entity
+        end
     end
 
     def update
         if @prompt.update(prompt_params)
             render json: @prompt
         else
-            render json: {errors: prompt.errors }, message: 'you did something wrong', status: :unprocessable_entity
+            render json: {errors: prompt.errors }, message: 'you did something wrong, you IDIOT', status: :unprocessable_entity
+        end
     end
 
     def destroy
