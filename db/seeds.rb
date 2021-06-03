@@ -5,8 +5,33 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Log.destroy_all
+Prompt.destroy_all
+User.destroy_all
 
+User.create(
+    nickname: 'admin_1',
+    name: 'Admin',
+    email: 'admin@admin.com',
+    password: 'abc123'
+)
+50.times do |i|
+    Prompt.create(
+        user_id:1,
+        title:"Test Prompt #{i}",
+        description: "This is a desctirption for Test Prompt #{i}",
+        rating: "#{rand(20..100)}%"
+    )
+    Log.create(
+        user_id:1,
+        prompt_id:i,
+        text:'this should be a textarea not a string lol',
+        private:false
+    )
 
+end
+
+puts "seeded 1 users, 50 prompts and 50 logs"
 
 
 
