@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_202957) do
+ActiveRecord::Schema.define(version: 2021_06_03_203449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "logs", force: :cascade do |t|
+    t.bigint "prompt_id", null: false
+    t.bigint "user_id", null: false
+    t.string "text"
+    t.boolean "private"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prompt_id"], name: "index_logs_on_prompt_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
+  create_table "prompts", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.string "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_prompts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_202957) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "logs", "prompts"
+  add_foreign_key "logs", "users"
+  add_foreign_key "prompts", "users"
 end
