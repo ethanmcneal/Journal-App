@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, AppRegistry } from "react-native";
-
+import { StyleSheet, View} from "react-native";
+import {Provider as PaperProvider} from 'react-native-paper'
 import { NativeRouter, Route, Link } from "react-router-native";
+import BottomNavbar from "./components/BottomNavbar";
 import Navbar from "./components/Navbar";
 import About from "./screens/About";
 import Home from "./screens/Home";
 
 
 const App = () => (
+  <PaperProvider>
   <NativeRouter>
     <View style={styles.container}>
      <Navbar styles={styles}/>
@@ -15,8 +17,10 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
       {/* <Route path="/topics" component={Topics} /> */}
+      <BottomNavbar />
     </View>
   </NativeRouter>
+  </PaperProvider>
 );
 
 const styles = StyleSheet.create({
